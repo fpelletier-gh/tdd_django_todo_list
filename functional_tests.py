@@ -9,6 +9,11 @@ class NewVisitorTest(unittest.TestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
 
+    def check_for_row_in_list_table(self, row_text):
+        table = self.browser.find_element_by_id("list-table")
+        rows = table.find_elements_by_tag_name("tr")
+        self.assertIn(row_text, [row.text for row in rows])
+
     def tearDown(self):
         self.browser.quit()
 
@@ -40,10 +45,8 @@ class NewVisitorTest(unittest.TestCase):
         time.sleep(1)
 
         # The page updates and show the updated list with both items
-        table = self.browser.find_element_by_id("list-table")
-        rows = table.find_elements_by_tag_name("tr")
-        self.assertIn("1: Groceries", [row.text for row in rows])
-        self.assertIn("2: Wash the dishes", [row.text for row in rows])
+        self.check_for_row_in_list_table("1: Groceries")
+        self.check_for_row_in_list_table("2: Wash the dishes")
 
         self.fail("Finish the test!")
         # The user see look to see that a unique url was generated for him
