@@ -32,19 +32,20 @@ class NewVisitorTest(unittest.TestCase):
         inputbox.send_keys(Keys.ENTER)
         time.sleep(1)
 
-        table = self.browser.find_element_by_id("list-table")
-        rows = table.find_elements_by_tag_name("tr")
-        self.assertTrue(
-            any(row.text == "1: Groceries" for row in rows),
-            "New todo item did not appear in table",
-        )
-
         # There is still an input to enter a new item
         # He enter a new item "Wash the dishes"
-        self.fail("Finish the test!")
+        inputbox = self.browser.find_element_by_id("new-item-input")
+        inputbox.send_keys("Wash the dishes")
+        inputbox.send_keys(Keys.ENTER)
+        time.sleep(1)
 
         # The page updates and show the updated list with both items
+        table = self.browser.find_element_by_id("list-table")
+        rows = table.find_elements_by_tag_name("tr")
+        self.assertIn("1: Groceries", [row.text for row in rows])
+        self.assertIn("2: Wash the dishes", [row.text for row in rows])
 
+        self.fail("Finish the test!")
         # The user see look to see that a unique url was generated for him
 
         # He visit that url and his todo list is still there
