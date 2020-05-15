@@ -19,7 +19,7 @@ class NewVisitorTest(unittest.TestCase):
         # He look at the title and header and it mention to-do
         self.assertIn("To-Do", self.browser.title)
         header_text = self.browser.find_element_by_tag_name("h1")
-        self.assertIn("To-Do", header_text)
+        self.assertIn("To-Do", header_text.text)
         # He is invited to enter a todo item
         inputbox = self.browser.find_element_by_id("new-item-input")
         self.assertEqual(inputbox.get_attribute("placeholder"), "Enter a to-do item")
@@ -34,7 +34,10 @@ class NewVisitorTest(unittest.TestCase):
 
         table = self.browser.find_element_by_id("list-table")
         rows = table.find_elements_by_tag_name("tr")
-        self.assertTrue(any(row.text == "1: Groceries" for row in rows))
+        self.assertTrue(
+            any(row.text == "1: Groceries" for row in rows),
+            "New todo item did not appear in table",
+        )
 
         # There is still an input to enter a new item
         # He enter a new item "Wash the dishes"
