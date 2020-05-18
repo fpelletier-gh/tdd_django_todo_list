@@ -77,6 +77,7 @@ class NewVisitorTest(LiveServerTestCase):
         ## the first user is comming through from cookies etc
         self.browser.quit()
         self.browser = webdriver.Firefox()
+        self.browser.get(self.live_server_url)
 
         # User2 visit the home page there is no sign of the first user list
         inputbox = self.browser.find_element_by_id("new-item-input")

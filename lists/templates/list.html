@@ -16,5 +16,15 @@
         placeholder="Enter a to-do item"
       />
     </form>
+    <table id="list-table">
+      {% for item in items %}
+      <tr>
+        <td>
+          {{ forloop.counter }}: {{ item.text }}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
   </body>
 </html>
+
