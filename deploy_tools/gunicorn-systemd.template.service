@@ -7,7 +7,7 @@ User=francis
 WorkingDirectory=/home/francis/sites/SITENAME/source
 ExecStart=/home/francis/sites/SITENAME/virtualenv/bin/gunicorn \
     --bind unix:/tmp/SITENAME.socket \
-    superlists.wsgi:application
+    todolist.wsgi:application
 
 [Install]
 WantedBy=multi-user.target
