@@ -1,5 +1,4 @@
 import os
-from django.test import LiveServerTestCase
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -126,4 +125,3 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertAlmostEqual(
             inputbox.location["x"] + inputbox.size["width"] / 2, 512, delta=10
         )
-
